@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+    <script>
+        xmlhttp = new XMLHttpRequest();
+        function log(msg) {
+           document.getElementById("cikti").innerHTML = msg
+         }
+         
+        function reqListener () {
+            console.log('komut başladı');
+        }
+
+        function updateProgress (oEvent) {
+            event1 = oEvent;
+            log(oEvent.target.responseText);
+        }
+        
+        function calistir() {
+			url = 'stream/' + document.getElementById("komut").value;
+			xmlhttp.addEventListener('load', reqListener);
+			xmlhttp.addEventListener('progress', updateProgress, false);
+			xmlhttp.open("get", url, true);
+			xmlhttp.send();
+		}
+    </script>
+<body>
+    <h1>Realtime SSH Demo</h1>
+    <input type="text" id="komut"></input>
+    <button onclick="calistir();">Çalıştır</button>
+    <pre id="cikti"></p>
+</body>
+</html>
